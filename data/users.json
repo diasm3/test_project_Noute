@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "email": "james@test.com",
+        "name": "제임스",
+        "gender": "male"
+    },
+    {
+        "id": 2,
+        "email": "kadin@test.com",
+        "name": "카딘",
+        "gender": "male"
+    },
+    {
+        "id": 3,
+        "email": "rachael@test.com",
+        "name": "레이첼",
+        "gender": "female"
+    },
+    {
+        "id": 4,
+        "email": "tanner@test.com",
+        "name": "태너",
+        "gender": "male"
+    },
+    {
+        "id": 5,
+        "email": "yasmin@test.com",
+        "name": "야스민",
+        "gender": "female"
+    },
+    {
+        "id": 6,
+        "email": "sally@test.com",
+        "name": "샐리",
+        "gender": "female"
+    },
+    {
+        "id": 7,
+        "email": "gabriel@test.com",
+        "name": "가브리엘",
+        "gender": "male"
+    },
+    {
+        "id": 8,
+        "email": "nadia@test.com",
+        "name": "나디아",
+        "gender": "female"
+    },
+    {
+        "id": 9,
+        "email": "pablo@test.com",
+        "name": "파블로",
+        "gender": "male"
+    },
+    {
+        "id": 10,
+        "email": "vanessa@test.com",
+        "name": "바네사",
+        "gender": "female"
+    }
+]
