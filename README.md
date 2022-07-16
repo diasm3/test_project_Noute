@@ -35,11 +35,11 @@ users
 
 | 분류     | 기능                                 | 메소드 | URL                                           | 메모                                 |
 | -------- | ------------------------------------ | ------ | --------------------------------------------- | ------------------------------------ |
-| products | 상품조회                             | Get    | /api/getProducts                              | 전체 상품 목록                       |
-|          | 카테고리별 조회                      | Post   | /api/orders/getByCategories?type              | 카테고리별 상품 목록(query)          |
-|          | 랜덤 카테고리 조회                   | Post   | /api/orders/getRandomByCategories?type        | 랜덤 카테고리 상품 목록(query)       |
-|          | 상품 상세 조회                       | Get    | /api/orders/getProduct?id=${id}               | 상품 상세 조회                       |
-| sales    | 성별 최고로 많이 판매된 상품 조회    | Get    | /api/sales/getBestSeller?type=${gender}       | 성별 최고로 많이 판매된 상품 조회    |
+| products | 상품조회                             | Get    | /api/products/getProducts                              | 전체 상품 목록                       |
+|          | 카테고리별 조회                      | Post   | /api/products/getByCategories?type=${type}              | 카테고리별 상품 목록(query)          |
+|          | 랜덤 카테고리 조회                   | Post   | /api/products/getRandomByCategories        | 랜덤 카테고리 상품 목록(query)       |
+|          | 상품 상세 조회                       | Get    | /api/products/getProduct?id=${id}               | 상품 상세 조회                       |
+| sales    | 성별 최고로 많이 판매된 상품 조회    | Get    | /api/sales/getBestSeller?gender=${gender}       | 성별 최고로 많이 판매된 상품 조회    |
 |          | 월별 판매 총액이 가장 높은 상품 조회 | Get    | /api/sales/getBestSellerByMonth?type=${month} | 월별 판매 총액이 가장 높은 상품 조회 |
 |          | 구매횟수가 가장 적은 회원 조회       | Get    | /api/sales/getLowestBuyer                     | 구매횟수가 가장 적은 회원 조회       |
 
