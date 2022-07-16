@@ -15,6 +15,7 @@ export class ProductsService {
    // getProducts
    async getProducts(): Promise<CreateProductsDto | object> {
       try {
+         // const resultData = this.productsRepository.getProducts();
          const resultData = MOCK_PRODUCTS.map((data) => data);
          return resultData;
       } catch (err) {

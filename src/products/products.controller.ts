@@ -37,7 +37,7 @@ export class ProductsController {
    @ApiOkResponse({ type: Products, isArray: true })
    @ApiQuery({ name: 'Products', required: false })
    @ApiCreatedResponse({ type: Products })
-   @Get()
+   @Get('getProducts')
    async getProducts(): Promise<object> {
       try {
          this.logger.verbose(`getProducts list`);
