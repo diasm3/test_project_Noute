@@ -5,9 +5,8 @@
 
 ### 아키텍쳐
 
--  프레임워크 : Nest.js, TypeOrm, Docker, Docker Compose
+-  프레임워크 : Nest.js, Json
 -  데이터베이스 : MariaDB
--  서버 : 개인NAS 서버 or AWS...
 -  에러처리 :
 -  testcode 및 swagger
 <!-- * 프론트를 할까말까....  -->
