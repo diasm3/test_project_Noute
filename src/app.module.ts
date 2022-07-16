@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from '../config';
-import { UserRepository } from '../src/users/users.repository';
+import { UserRepository } from './users/users.repository';
 import { ProductsModule } from './products/products.module';
 import { ProductsService } from './products/products.service';
 import { ProductsRepository } from './products/products.repository';
