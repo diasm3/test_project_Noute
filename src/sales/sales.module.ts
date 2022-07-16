@@ -6,8 +6,8 @@ import { SalesRepository } from './sales.repository';
 import { SalesService } from './sales.service';
 
 @Module({
-   imports: [TypeOrmModule.forFeature([Sales])],
-   providers: [SalesService, SalesRepository],
+   // imports: [TypeOrmModule.forFeature([Sales])],
+   providers: [SalesService],
    controllers: [SalesController],
    exports: [SalesService],
 })

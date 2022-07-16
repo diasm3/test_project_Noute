@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { SalesRepository } from './sales.repository';
+// import { InjectRepository } from '@nestjs/typeorm';
+// import { SalesRepository } from './sales.repository';
 import * as MOCK_SALES from '../../data/sales.json';
 import * as MOCK_PRODUCTS from '../../data/products.json';
 import * as MOCK_ORDERS from '../../data/orders.json';
@@ -9,10 +9,10 @@ import { GenderDto } from '../users/dto/users.dto';
 
 @Injectable()
 export class SalesService {
-   constructor(
-      @InjectRepository(SalesRepository)
-      private readonly salesRepository: SalesRepository
-   ) {}
+   // constructor(
+   //    @InjectRepository(SalesRepository)
+   //    private readonly salesRepository: SalesRepository
+   // ) {}
 
    //salse, order, users join
    async sortedBySales(): Promise<any> {
