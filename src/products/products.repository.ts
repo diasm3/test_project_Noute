@@ -2,15 +2,13 @@ import { Repository, DataSource } from 'typeorm';
 import { Injectable, Logger } from '@nestjs/common';
 import { Products } from '../products/entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CustomRepository } from '../customRespitory/customRespoitory';
 
-@Injectable()
+// @Injectable()
+@CustomRepository(Products)
 export class ProductsRepository extends Repository<Products> {
-   /* 댓글 업로드 퀘스트 수행 */
    private logger = new Logger('ProductsRepository');
 
-   constructor(private dataSource: DataSource) {
-      super(Products, dataSource.createEntityManager());
-   }
    // getProducts
    findAll(): Promise<Products[]> {
       return this.find();
@@ -32,8 +30,6 @@ export class ProductsRepository extends Repository<Products> {
       try {
          this.logger.verbose('repository');
          console.log(type);
-         // const result = await this.find({ type });
-         // this.logger.verbose(result);
          return undefined;
       } catch (err) {
          return undefined;

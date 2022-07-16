@@ -23,7 +23,7 @@ import {
 } from '@nestjs/common';
 import { Products } from './entities/products.entity';
 import { ProductsService } from './products.service';
-import * as MOCK_PRODUCTS from '../../data/products.json';
+import { TypeDto } from './dto/products.dto';
 
 @Controller('api/products')
 @ApiTags('products API')
@@ -32,20 +32,65 @@ export class ProductsController {
    constructor(private readonly productsService: ProductsService) {}
 
    /*
-    * getProducts 요청에 대한 응답
+    * getProducts Request response
     */
    @ApiOkResponse({ type: Products, isArray: true })
    @ApiQuery({ name: 'Products', required: false })
    @ApiCreatedResponse({ type: Products })
-   @Get()
-   async getProducts(@Res() res: Response): Promise<object> {
+   @Get('getProducts')
+   async getProducts(): Promise<object> {
       try {
          this.logger.verbose(`getProducts list`);
-         console.log('helloworld');
-         const result = this.productsService.getProducts();
-         console.log(JSON.stringify(MOCK_PRODUCTS[0].id));
-         return undefined;
-         // return res.status(HttpStatus.OK).json(result);
+         const result = await this.productsService.getProducts();
+
+         /*
+          * return data with status code 200
+          */
+         return { ok: true, data: result };
+      } catch (err) {
+         return { ok: false, row: err.message };
+      }
+   }
+
+   /*
+    * getByCategories
+    * @param {string} id
+    */
+   @ApiOkResponse({ type: Products, isArray: true })
+   // @ApiQuery({ name: 'Products', required: false })
+   @ApiCreatedResponse({ type: Products })
+   @Post('/getByCategories')
+   async getByCategories(@Body() typeDto: TypeDto): Promise<object> {
+      try {
+         const { type } = typeDto;
+         this.logger.verbose(`filter by type : ${type}`);
+         const result = await this.productsService.getByCategories({ type });
+
+         /*
+          * return data with status code 200
+          */
+         return { ok: true, data: result };
+      } catch (err) {
+         return { ok: false, row: err.message };
+      }
+   }
+
+   /*
+    * getRandomByCategories
+    */
+   @ApiOkResponse({ type: Products, isArray: true })
+   // @ApiQuery({ name: 'Products', required: false })
+   @ApiCreatedResponse({ type: Products })
+   @Get('getRandomByCategories')
+   async getRandomByCategories(): Promise<object> {
+      try {
+         this.logger.verbose(`randomly selected product by type  `);
+         const result = await this.productsService.getRandomByCategories();
+
+         /*
+          * return data with status code 200
+          */
+         return { ok: true, data: result };
       } catch (err) {
          return { ok: false, row: err.message };
       }
