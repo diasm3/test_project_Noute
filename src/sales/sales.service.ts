@@ -14,9 +14,8 @@ export class SalesService {
       private readonly salesRepository: SalesRepository
    ) {}
 
-
    //salse, order, users join
-   async sortedBySales(): Promise<object[]> {
+   async sortedBySales(): Promise<any> {
       try {
          let sortedData = {};
          const dataResult = [];
@@ -40,13 +39,14 @@ export class SalesService {
 
                (sortedData = {
                   saleId: salesData.id,
-                  orderedDate: salesData.orderedAt,
                   orderId: salesData.orderId,
                   productId: productData[0].id,
                   price: productData[0].price,
                   productName: productData[0].name,
+                  userName: userData[0].name,
                   userId: orderData[0].userId,
                   gender: userData[0].gender,
+                  orderedDate: salesData.orderedAt,
                }),
                   dataResult.push(sortedData);
             });
@@ -57,30 +57,73 @@ export class SalesService {
          return err.message;
       }
    }
+   async getLowestBuyer(): Promise<object[]> {
+      try {
+         //성별로 최고로 많이 판매된 상품 조회
 
-   async getBestSellerByMonth(month: number): Promise<object[]> {
+         const sortedData = await this.sortedBySales();
+         console.log(sortedData);
+
+         const result = sortedData.reduce((acc, curr) => {
+            if (typeof acc[curr.userId] == 'undefined') {
+               acc[curr.userId] = 1;
+            } else {
+               acc[curr.userId] += 1;
+            }
+            return acc;
+         }, {});
+
+         const arrayData: number[] = Object.values(result);
+         const value = Math.min(...arrayData);
+
+         let userId = null;
+
+         arrayData.map((data, index) => {
+            if (value === arrayData[index]) userId = Object.keys(result)[index];
+         });
+
+         const resultData = MOCK_USERS.filter((data) => {
+            if (data.id === parseInt(userId)) return data.name;
+         });
+
+         return resultData;
+      } catch (err) {
+         return err.message;
+      }
+   }
+
+   async getBestSellerByMonth(month: number): Promise<number> {
       try {
          const sortedData = await this.sortedBySales();
+         const array = [];
 
-         const result = sortedData.map((data) => {
+         sortedData.map((data) => {
             const monthData = new Date(data.orderedDate).getMonth() + 1;
 
             if (month === monthData) {
-               console.log(data);
-               const result = data.reduce((acc, curr) => {
-                  console.log('hello world');
-                  if (typeof acc[curr.productName] === 'undefined') {
-                     // console.log(acc[curr.productName], curr.price);
-                     acc[curr.productName] = curr.price;
-                  } else {
-                     acc[curr.productName] += curr.price;
-                  }
-                  return acc;
-               }, {});
-               console.log(result);
+               array.push(data);
             }
          });
-         return result;
+
+         const result = array.reduce((acc, curr) => {
+            if (typeof acc[curr.productName] === 'undefined') {
+               acc[curr.productName] = curr.price;
+            } else {
+               acc[curr.productName] += curr.price;
+            }
+            return acc;
+         }, {});
+
+         const resultData: number[] = Object.values(result);
+         const value = Math.max(...resultData);
+
+         let result2 = null;
+
+         resultData.map((data, index) => {
+            if (value === resultData[index])
+               result2 = Object.keys(result)[index];
+         });
+         return result2;
       } catch (err) {
          return err.message;
       }

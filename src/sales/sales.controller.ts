@@ -84,4 +84,27 @@ export class SalesController {
          return { ok: false, row: err.message };
       }
    }
+
+   /*
+    * getBestSellerByGender
+    */
+   @ApiOkResponse({ type: Sales, isArray: true })
+   @ApiQuery({ name: 'Sales', required: false })
+   @ApiCreatedResponse({ type: Sales })
+   @ApiOperation({
+      summary: '성별로 최고로 많이 판매된 상품 조회 API',
+      description: '현재 기준 가장 많이 판매된 상품 조회 (성별로 구분)',
+   })
+   @ApiNotFoundResponse({ description: '잘못된 성별을 입력하셨습니다' })
+   @Get('getLowestBuyer')
+   async getLowestBuyer(): Promise<object> {
+      try {
+         this.logger.verbose(`getLowestBuyer`);
+         const result = await this.salesService.getLowestBuyer();
+
+         return { ok: true, data: result };
+      } catch (err) {
+         return { ok: false, row: err.message };
+      }
+   }
 }

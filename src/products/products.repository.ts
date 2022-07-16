@@ -30,8 +30,6 @@ export class ProductsRepository extends Repository<Products> {
       try {
          this.logger.verbose('repository');
          console.log(type);
-         // const result = await this.find({ type });
-         // this.logger.verbose(result);
          return undefined;
       } catch (err) {
          return undefined;
