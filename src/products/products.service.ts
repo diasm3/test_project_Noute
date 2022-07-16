@@ -1,4 +1,4 @@
-import { CreateProductsDto } from './dto/products.dto';
+import { CreateProductsDto, TypeDto } from './dto/products.dto';
 import { Controller, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities/products.entity';
@@ -22,8 +22,30 @@ export class ProductsService {
       }
    }
 
-   getData() {
-      const resultData = MOCK_PRODUCTS.map((data) => data);
-      return resultData[0];
+   async getByCategories(
+      typeDto: TypeDto
+   ): Promise<CreateProductsDto | object> {
+      try {
+         const { type } = typeDto;
+
+         const resultData = MOCK_PRODUCTS.filter((data) =>
+            data.type.includes(type)
+         );
+         return resultData;
+      } catch (err) {
+         return err.message;
+      }
+   }
+
+   async getRandomByCategories(): Promise<CreateProductsDto | object> {
+      try {
+         const resultData = MOCK_PRODUCTS.filter((data) =>
+            data.type.includes('hello')
+         );
+
+         return resultData;
+      } catch (err) {
+         return err.message;
+      }
    }
 }

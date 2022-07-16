@@ -18,10 +18,4 @@ export class CreateProductsDto {
    price: number;
 }
 
-// export class InputPlayerDto extends PickType(CreatePlayerDto, [
-//    'email',
-//    'password',
-//    'nickname',
-//    'mbti',
-//    'profileImg',
-// ] as const) {}
+export class TypeDto extends PickType(CreateProductsDto, ['type'] as const) {}
