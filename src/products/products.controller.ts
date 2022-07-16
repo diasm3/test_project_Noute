@@ -23,7 +23,6 @@ import {
 } from '@nestjs/common';
 import { Products } from './entities/products.entity';
 import { ProductsService } from './products.service';
-import * as MOCK_PRODUCTS from '../../data/products.json';
 
 @Controller('api/products')
 @ApiTags('products API')
@@ -38,13 +37,12 @@ export class ProductsController {
    @ApiQuery({ name: 'Products', required: false })
    @ApiCreatedResponse({ type: Products })
    @Get()
-   async getProducts(@Res() res: Response): Promise<object> {
+   async getProducts(): Promise<object> {
       try {
          this.logger.verbose(`getProducts list`);
-         console.log('helloworld');
-         const result = this.productsService.getProducts();
-         console.log(JSON.stringify(MOCK_PRODUCTS[0].id));
-         return undefined;
+         const result = await this.productsService.getProducts();
+
+         return { ok: true, data: result };
          // return res.status(HttpStatus.OK).json(result);
       } catch (err) {
          return { ok: false, row: err.message };

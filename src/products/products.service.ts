@@ -1,3 +1,4 @@
+import { CreateProductsDto } from './dto/products.dto';
 import { Controller, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities/products.entity';
@@ -12,13 +13,17 @@ export class ProductsService {
    ) {}
 
    // getProducts
-   async getProducts(): Promise<Products | undefined> {
+   async getProducts(): Promise<CreateProductsDto | object> {
       try {
-         console.log('service');
-         // console.log(json(MOCK_PRODUCTS));
-         return undefined;
+         const resultData = MOCK_PRODUCTS.map((data) => data);
+         return resultData;
       } catch (err) {
          return err.message;
       }
+   }
+
+   getData() {
+      const resultData = MOCK_PRODUCTS.map((data) => data);
+      return resultData[0];
    }
 }
