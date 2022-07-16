@@ -39,11 +39,19 @@ export class ProductsService {
 
    async getRandomByCategories(): Promise<CreateProductsDto | object> {
       try {
-         const resultData = MOCK_PRODUCTS.filter((data) =>
-            data.type.includes('hello')
-         );
+         // type 별로 그룹화
+         // -> 만약 쿼리로 했을 경우에는...좀더 쉬웠을까?
+         // 그룹화 된것중에 Random으로 하나를 가져옴
+         const types = [...new Set(MOCK_PRODUCTS.map((data) => data.type))];
 
-         return resultData;
+         const sort = types.map((type) => {
+            const sortedData = MOCK_PRODUCTS.filter((data) =>
+               data.type.includes(type)
+            );
+            return sortedData[Math.floor(Math.random() * sortedData.length)];
+         });
+
+         return sort;
       } catch (err) {
          return err.message;
       }

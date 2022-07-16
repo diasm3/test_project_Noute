@@ -77,12 +77,11 @@ export class ProductsController {
 
    /*
     * getRandomByCategories
-    * @param {string} id
     */
    @ApiOkResponse({ type: Products, isArray: true })
    // @ApiQuery({ name: 'Products', required: false })
    @ApiCreatedResponse({ type: Products })
-   @Post('getRandomByCategories')
+   @Get('getRandomByCategories')
    async getRandomByCategories(): Promise<object> {
       try {
          this.logger.verbose(`randomly selected product by type  `);
