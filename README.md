@@ -5,15 +5,8 @@
 
 ### 아키텍쳐
 
--  프레임워크 : Nest.js, TypeOrm, Docker, Docker Compose
--  데이터베이스 : MariaDB
--  서버 : 개인NAS 서버 or AWS...
--  에러처리 :
--  testcode 및 swagger
-<!-- * 프론트를 할까말까....  -->
-
- <!-- * 만약 프론트를 하게된다면
- * vite로 간단하게 만들어서 해야겠다.  -->
+-  프레임워크 : Nest.js
+-  데이터베이스 : MariaDB, JSON
 
 ### 데이터베이스 구조
 
@@ -33,54 +26,41 @@ users
 
 ### API 명세서
 
-| 분류     | 기능                                 | 메소드 | URL                                       | 메모                                 |
-| -------- | ------------------------------------ | ------ | ----------------------------------------- | ------------------------------------ |
-| products | 상품조회                             | Get    | /api/products/getProducts                 | 전체 상품 목록                       |
-|          | 카테고리별 조회                      | Post   | /api/products/getByCategories             | 카테고리별 상품 목록                 |
-|          | 랜덤 카테고리 조회                   | Get    | /api/products/getRandomByCategories       | 랜덤 카테고리 상품 목록              |
-| sales    | 성별 최고로 많이 판매된 상품 조회    | Get    | /api/sales/getBestSeller?gender=${gender} | 성별 최고로 많이 판매된 상품 조회    |
-|          | 월별 판매 총액이 가장 높은 상품 조회 | Post   | /api/sales/getBestSellerByMonth           | 월별 판매 총액이 가장 높은 상품 조회 |
-|          | 구매횟수가 가장 적은 회원 조회       | Get    | /api/sales/getLowestBuyer                 | 구매횟수가 가장 적은 회원 조회       |
+| 분류     | 기능                                 | 메소드 | URL                                                  | 메모                                 |
+| -------- | ------------------------------------ | ------ | ---------------------------------------------------- | ------------------------------------ |
+| products | 상품조회                             | Get    | /api/products/getProducts                            | 전체 상품 목록                       |
+|          | 카테고리별 조회                      | Post   | /api/products/getByCategories                        | 카테고리별 상품 목록                 |
+|          | 랜덤 카테고리 조회                   | Get    | /api/products/getRandomByCategories                  | 랜덤 카테고리 상품 목록              |
+| sales    | 성별 최고로 많이 판매된 상품 조회    | Get    | /api/sales/getBestSeller?gender=gender(male, female) | 성별 최고로 많이 판매된 상품 조회    |
+|          | 월별 판매 총액이 가장 높은 상품 조회 | Get    | /api/sales/getBestSellerByMonth?month=number         | 월별 판매 총액이 가장 높은 상품 조회 |
+|          | 구매횟수가 가장 적은 회원 조회       | Get    | /api/sales/getLowestBuyer                            | 구매횟수가 가장 적은 회원 조회       |
 
 ### API 설명(작성중)
 
-| API url       | endpoint              | Request Method | Request Body           |                      Status Code                      |                                 Return                                  |
-| ------------- | --------------------- | :------------: | ---------------------- | :---------------------------------------------------: | :---------------------------------------------------------------------: |
-| /api/products | getProducts           |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true, "data" : [{id : nuber, type: string, name: string, description: string, price: number}] }` <br /> `{ok: false, "message": "string"}` |
-| /api/products | getByCategories       |      Post      | `{ "type" : "string"}` |  `201 ok`<br /> `400 Bad Request`<br />`409 Conflct`  |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
-| /api/products | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
-| /api/sales    | getBestSeller         |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
-| /api/sales    | getBestSellerByMonth  |      Post      |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
-| /api/sales    | getLowestBuyer        |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
+| API url       |       endpoint        | Request Method | Request Body           |                      Status Code                      |                                                                       Return                                                                        |
+| ------------- | :-------------------: | :------------: | ---------------------- | :---------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
+| /api/products |      getProducts      |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true, "data" : [{id : nuber, type: string, name: string, description: string, price: number}] }` <br /> `{ok: false, "message": "string"}` |
+| /api/products |    getByCategories    |      Post      | `{ "type" : "string"}` |  `201 ok`<br /> `400 Bad Request`<br />`409 Conflct`  |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+| /api/products | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+| /api/sales    |     getBestSeller     |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+| /api/sales    | getBestSellerByMonth  |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+| /api/sales    |    getLowestBuyer     |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 
 ### **두 번째**
 
--  전체 상품 목록을 얻을 수 있습니다.
-
-   -  **Get 으로 상품 목록을 받을 수 있다.**
-
--  특정 카테고리별로 상품을 얻을 수 있습니다. (type으로 항목을 식별합니다.)
-
-   -  **Post 으로 카테고리별 상품 목록을 받을 수 있다.**
-
--  각 카테고리별 상품을 1가지씩 랜덤으로 얻을 수 있습니다. (각 상품은 객체에 담아 보내주세요.)
-
-   -  **각 카테고리별 상품을 한개씩 가져와서 API로 뿌려 준다.**
-
--  판매된 상품들 중 여성(female) 회원에게 판매된 횟수가 가장 많은 상품의 이름을 얻을 수 있습니다.
-
-   -  **male or femail로 구별하여 가장 많이 판매된 상품을 가져온다.**
-
--  3월 판매 총액이 가장 높은 상품을 얻을 수 있습니다. (상품은 객체에 담아 보내주세요.)
-
-   -  **월별로 가져올수 있게끔 api를 작성**
-
--  구매 횟수가 가장 적은 회원과, 구매 총액이 가장 높은 회원의 이름을 각각 얻을 수 있습니다. (두 가지 조건에 해당하는 회원이 동일한 회원이라면, 해당 회원의 이름을 보내주세요.)
-   -  **이건 typeorm 에서 해결**
+-  전체 상품 목록을 얻을 수 있습니다. [o]
+-  특정 카테고리별로 상품을 얻을 수 있습니다. (type으로 항목을 식별합니다.) [o]
+-  각 카테고리별 상품을 1가지씩 랜덤으로 얻을 수 있습니다. (각 상품은 객체에 담아 보내주세요.) [o]
+-  판매된 상품들 중 여성(female) 회원에게 판매된 횟수가 가장 많은 상품의 이름을 얻을 수 있습니다. [o]
+-  3월 판매 총액이 가장 높은 상품을 얻을 수 있습니다. (상품은 객체에 담아 보내주세요.) [o]
+-  구매 횟수가 가장 적은 회원과, 구매 총액이 가장 높은 회원의 이름을 각각 얻을 수 있습니다. (두 가지 조건에 해당하는 회원이 동일한 회원이라면, 해당 회원의 이름을 보내주세요.) [o]
 
 ### **마지막**
 
 > -  테스트를 진행하시면서 개선되어야 할 점이 무엇이라고 생각하시나요?
+>    **조금더 어느정도까지 구현을 해야 하는지 알려주시면 좋을거 같습니다.**
+
+-  swagger, testcode, typeorm, docker 등등..
 
 > -  테스트를 진행하시면서 어떤 부분이 가장 까다로우셨나요?
 
@@ -95,4 +75,10 @@ users
 
 시간이 없으니 원하는 MPV까지 빠르게 구현을 하고 이 버전 업데이트에 관련된 부분에 대해서는 직접 해결
 
+-  결국에는 mockup data로 대부분 기능을 구현했습니다.
+
 > -  테스트 코드에서 가장 자신있는 부분은 어디인가요?
+
+-  자신있다고 할 수는 없지만, MVC 페턴으로 비지니스로직과 컨트롤러부분을 나누어 구현한 것
+-  그래도 비지니스 로직은 구현을 완료 했다는 점에 대해서 만족하고 있습니다.
+-  시간이 더 있다면 swagger, testcode, expection 까지 더 할 수 있었지만 typeorm 으로 구현 하려다가 시간을 다 썻습니다.

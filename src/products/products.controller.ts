@@ -1,26 +1,10 @@
 import {
    ApiCreatedResponse,
    ApiOkResponse,
-   ApiOperation,
    ApiQuery,
    ApiTags,
 } from '@nestjs/swagger';
-import {
-   Body,
-   Controller,
-   Get,
-   Patch,
-   Post,
-   UseGuards,
-   Request,
-   Logger,
-   BadRequestException,
-   UnauthorizedException,
-   HttpCode,
-   Res,
-   Param,
-   HttpStatus,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Logger } from '@nestjs/common';
 import { Products } from './entities/products.entity';
 import { ProductsService } from './products.service';
 import { TypeDto } from './dto/products.dto';

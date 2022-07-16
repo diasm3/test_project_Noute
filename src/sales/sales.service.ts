@@ -57,14 +57,15 @@ export class SalesService {
          return err.message;
       }
    }
+
+   // get lowest buyer by transaction
    async getLowestBuyer(): Promise<object[]> {
       try {
-         //성별로 최고로 많이 판매된 상품 조회
+         // get sales data with ordered, product, user
+         const sortedSaleData = await this.sortedBySales();
 
-         const sortedData = await this.sortedBySales();
-         console.log(sortedData);
-
-         const result = sortedData.reduce((acc, curr) => {
+         // combine data by userId
+         const combineByUserId = sortedSaleData.reduce((acc, curr) => {
             if (typeof acc[curr.userId] == 'undefined') {
                acc[curr.userId] = 1;
             } else {
@@ -73,13 +74,15 @@ export class SalesService {
             return acc;
          }, {});
 
-         const arrayData: number[] = Object.values(result);
+         // get min value
+         const arrayData: number[] = Object.values(combineByUserId);
          const value = Math.min(...arrayData);
 
          let userId = null;
 
          arrayData.map((data, index) => {
-            if (value === arrayData[index]) userId = Object.keys(result)[index];
+            if (value === arrayData[index])
+               userId = Object.keys(combineByUserId)[index];
          });
 
          const resultData = MOCK_USERS.filter((data) => {
@@ -92,20 +95,58 @@ export class SalesService {
       }
    }
 
+   async getHighestBuyer(): Promise<object[]> {
+      try {
+         const sortedSaleData = await this.sortedBySales();
+
+         // join duplicate productName calculate total price
+         const dupNamewithPrice = sortedSaleData.reduce((acc, curr) => {
+            if (typeof acc[curr.userName] === 'undefined') {
+               acc[curr.userName] = curr.price;
+            } else {
+               acc[curr.userName] += curr.price;
+            }
+            return acc;
+         }, {});
+
+         // get min value
+         const arrayData: number[] = Object.values(dupNamewithPrice);
+         const value = Math.max(...arrayData);
+
+         let userName = null;
+
+         arrayData.map((data, index) => {
+            if (value === arrayData[index])
+               userName = Object.keys(dupNamewithPrice)[index];
+         });
+
+         const resultData = MOCK_USERS.filter((data) => {
+            if (data.name === userName) return data;
+         });
+
+         return resultData;
+      } catch (err) {
+         return err.message;
+      }
+   }
+
    async getBestSellerByMonth(month: number): Promise<number> {
       try {
-         const sortedData = await this.sortedBySales();
+         // get sales data with ordered, product, user
+         const sortedSalesData = await this.sortedBySales();
          const array = [];
 
-         sortedData.map((data) => {
-            const monthData = new Date(data.orderedDate).getMonth() + 1;
+         // sorted by month add to array
+         sortedSalesData.map((salesData) => {
+            const monthData = new Date(salesData.orderedDate).getMonth() + 1;
 
             if (month === monthData) {
-               array.push(data);
+               array.push(salesData);
             }
          });
 
-         const result = array.reduce((acc, curr) => {
+         // join duplicate productName calculate total price
+         const dupNamewithPrice = array.reduce((acc, curr) => {
             if (typeof acc[curr.productName] === 'undefined') {
                acc[curr.productName] = curr.price;
             } else {
@@ -114,16 +155,17 @@ export class SalesService {
             return acc;
          }, {});
 
-         const resultData: number[] = Object.values(result);
-         const value = Math.max(...resultData);
+         // get max value
+         const selectOnlyPrice: number[] = Object.values(dupNamewithPrice);
+         const maxValue = Math.max(...selectOnlyPrice);
 
-         let result2 = null;
+         let bestSellerByMonth = null;
 
-         resultData.map((data, index) => {
-            if (value === resultData[index])
-               result2 = Object.keys(result)[index];
+         selectOnlyPrice.map((data, index) => {
+            if (maxValue === selectOnlyPrice[index])
+               bestSellerByMonth = Object.keys(dupNamewithPrice)[index];
          });
-         return result2;
+         return bestSellerByMonth;
       } catch (err) {
          return err.message;
       }
@@ -172,7 +214,6 @@ export class SalesService {
    // getProducts
    async getBestSellerByGender(genderDto: GenderDto): Promise<object[]> {
       try {
-         //성별로 최고로 많이 판매된 상품 조회
          const result = await this.getBestSeller(genderDto);
 
          return result;
