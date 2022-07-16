@@ -44,14 +44,14 @@ users
 
 ### API 설명(작성중)
 
-| API url       | endpoint              | Request Method | Request Body           |                      Status Code                      |                           Return                           |
-| ------------- | --------------------- | :------------: | ---------------------- | :---------------------------------------------------: | :--------------------------------------------------------: |
-| /api/products | getProducts           |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true }` <br /> `{ok: false, "message": "string"}` |
-| /api/products | getByCategories       |      Post      | `{ "type" : "string"}` |  `201 ok`<br /> `400 Bad Request`<br />`409 Conflct`  | `{ "ok" :true }` <br /> `{ok: false, "message": "string"}` |
-| /api/products | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true }` <br /> `{ok: false, "message": "string"}` |
-| /api/sales    | getBestSeller         |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true }` <br /> `{ok: false, "message": "string"}` |
-| /api/sales    | getBestSellerByMonth  |      Post      |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true }` <br /> `{ok: false, "message": "string"}` |
-| /api/sales    | getLowestBuyer        |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true }` <br /> `{ok: false, "message": "string"}` |
+| API url       | endpoint              | Request Method | Request Body           |                      Status Code                      |                                 Return                                  |
+| ------------- | --------------------- | :------------: | ---------------------- | :---------------------------------------------------: | :---------------------------------------------------------------------: |
+| /api/products | getProducts           |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` | `{ "ok" :true, "data" : [{id : nuber, type: string, name: string, description: string, price: number}] }` <br /> `{ok: false, "message": "string"}` |
+| /api/products | getByCategories       |      Post      | `{ "type" : "string"}` |  `201 ok`<br /> `400 Bad Request`<br />`409 Conflct`  |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
+| /api/products | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
+| /api/sales    | getBestSeller         |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
+| /api/sales    | getBestSellerByMonth  |      Post      |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
+| /api/sales    | getLowestBuyer        |      Get       |                        | `201 ok`<br /> `400 Bad Request` <br /> `409 Conflct` |       `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`        |
 
 ### **두 번째**
 
