@@ -1,8 +1,40 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Logger, ValidationPipe } from '@nestjs/common';
+import {
+   DocumentBuilder,
+   SwaggerCustomOptions,
+   SwaggerModule,
+} from '@nestjs/swagger';
+import * as express from 'express';
+import { ExpressAdapter } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+   const logger = new Logger();
+
+   const server = express();
+
+   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+
+   const swaggerConfig = new DocumentBuilder()
+      .setTitle('미니프로젝트')
+      .setDescription('API description')
+      .setVersion('1.0')
+      .build();
+   const document = SwaggerModule.createDocument(app, swaggerConfig);
+   const customOptions: SwaggerCustomOptions = {
+      swaggerOptions: {
+         persistAuthorization: true,
+      },
+      customSiteTitle: 'API Documentation',
+   };
+   SwaggerModule.setup('/', app, document, customOptions);
+
+   const serverPort = 3000;
+
+   const port = serverPort || 8080;
+   await app.listen(port);
+
+   logger.log(`Application running on port:: ${port}`);
 }
 bootstrap();
