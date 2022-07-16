@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from '../config';
 import { UserRepository } from './users/users.repository';
@@ -27,7 +25,7 @@ import { CustomTypeOrmModule } from './customRespitory/cutomTypeorm.module';
       SalesModule,
       // ProductsRepository,
    ],
-   controllers: [AppController, ProductsController, SalesController],
-   providers: [AppService, ProductsService, SalesService],
+   controllers: [ProductsController, SalesController],
+   providers: [ProductsService, SalesService],
 })
 export class AppModule {}
