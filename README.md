@@ -3,10 +3,31 @@
 -  이름 : 박세명
 -  포지션 : Backend Node.js 포지션
 
+## how to install
+
+1. 리눅스나 윈도우에 git, docker, docker compose 설치
+2. git 클론해서 다운받는다
+
+```bash
+$ git clone https://github.com/diasm3/test_project_Noute.git
+$ cd test_project_Noute
+```
+
+3. docker compose 한다 (version 2.2.3)
+
+```bash
+$ sudo docker compose up
+```
+
+4. swagger 접속 및 확인
+
+-  https://localhost:3000/api
+
 ### 아키텍쳐
 
 -  프레임워크 : Nest.js
 -  데이터베이스 : MariaDB, JSON
+-  배포서버 : 개인NAS 서버 (http://diasm.mooo.com:3000/api/)
 
 ### 데이터베이스 구조
 
@@ -35,16 +56,16 @@ users
 |          | 월별 판매 총액이 가장 높은 상품 조회                     | Get    | /api/sales/getBestSellerByMonth?month=number         | query                                        |
 |          | 구매횟수가 가장 적은 회원과 구매 금액이 가장큰 회원 조회 | Get    | /api/sales/getLowestBuyer                            | 두 조건의 이름이 같을시 한사람의 이름만 표기 |
 
-### API 설명(작성중)
+<!-- ### API 설명(작성중)
 
 | API url       |       endpoint        | Request Method | Request Body           |           Status Code            |                                                                       Return                                                                        |
 | ------------- | :-------------------: | :------------: | ---------------------- | :------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
 | /api/products |      getProducts      |      Get       |                        | `201 ok`<br /> `400 Bad Request` | `{ "ok" :true, "data" : [{id : nuber, type: string, name: string, description: string, price: number}] }` <br /> `{ok: false, "message": "string"}` |
-|               |    getByCategories    |      Post      | `{ "type" : "string"}` | `201 ok`<br /> `400 Bad Request`  |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+|               |    getByCategories    |      Post      | `{ "type" : "string"}` | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 |               | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 | /api/sales    |     getBestSeller     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 |               | getBestSellerByMonth  |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
-|               |    getLowestBuyer     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+|               |    getLowestBuyer     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              | -->
 
 ### **기능구현 목록**
 
