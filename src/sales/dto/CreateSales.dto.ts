@@ -1,8 +1,9 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { PickType } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 export class CreateSalesDto {
    @IsNotEmpty()
+   // @ApiProperty()
    id: number;
 
    @IsNotEmpty()

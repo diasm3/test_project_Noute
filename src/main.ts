@@ -28,7 +28,7 @@ async function bootstrap() {
       },
       customSiteTitle: 'API Documentation',
    };
-   SwaggerModule.setup('/', app, document, customOptions);
+   SwaggerModule.setup('api', app, document, customOptions);
 
    // init port and server
    const serverPort = 3000;

@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { PickType } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 export class CreateUsersDto {
    @IsNotEmpty()
@@ -12,7 +12,13 @@ export class CreateUsersDto {
    name: string;
 
    @IsNotEmpty()
+   @ApiProperty()
    gender: string;
 }
 
 export class GenderDto extends PickType(CreateUsersDto, ['gender'] as const) {}
+
+export enum GenderType {
+   male = 'male',
+   female = 'female',
+}
