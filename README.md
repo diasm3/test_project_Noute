@@ -3,6 +3,26 @@
 -  이름 : 박세명
 -  포지션 : Backend Node.js 포지션
 
+## how to install
+
+1. 리눅스나 윈도우에 git, docker, docker compose 설치
+2. git 클론해서 다운받는다
+
+```bash
+$ git clone https://github.com/diasm3/test_project_Noute.git
+$ cd test_project_Noute
+```
+
+3. docker compose 한다 (version 2.2.3)
+
+```bash
+$ sudo docker compose up
+```
+
+4. swagger 접속 및 확인
+
+-  https://localhost:3000/api
+
 ### 아키텍쳐
 
 -  프레임워크 : Nest.js
@@ -40,7 +60,7 @@ users
 | API url       |       endpoint        | Request Method | Request Body           |           Status Code            |                                                                       Return                                                                        |
 | ------------- | :-------------------: | :------------: | ---------------------- | :------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
 | /api/products |      getProducts      |      Get       |                        | `201 ok`<br /> `400 Bad Request` | `{ "ok" :true, "data" : [{id : nuber, type: string, name: string, description: string, price: number}] }` <br /> `{ok: false, "message": "string"}` |
-|               |    getByCategories    |      Post      | `{ "type" : "string"}` | `201 ok`<br /> `400 Bad Request`  |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+|               |    getByCategories    |      Post      | `{ "type" : "string"}` | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 |               | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 | /api/sales    |     getBestSeller     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 |               | getBestSellerByMonth  |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
