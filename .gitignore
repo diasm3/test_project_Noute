@@ -16,6 +16,8 @@ lerna-debug.log*
 
 # ENV
 
+# data
+/data
 
 
 # Tests
