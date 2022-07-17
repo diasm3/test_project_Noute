@@ -1,0 +1,43 @@
+# docker-compose.yaml
+version: '3.1'
+
+services:
+   mariadb:
+      container_name: mysql
+      image: mariadb:10
+      restart: always
+      env_file: ./.env
+      expose:
+         - '3306'
+      ports:
+          - '3306:3306'
+      volumes:
+         - ./init:/docker-entrypoint-initdb.d
+      environment:
+         - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+         - MYSQL_DATABASE=test
+         - 'TZ=Asia/Seoul'
+      command:
+         - --character-set-server=utf8mb4
+         - --collation-server=utf8mb4_unicode_ci
+
+   app:
+      depends_on:
+         - mariadb
+      build: ./
+      # dockerfile: Dockerfile
+      restart: unless-stopped
+      env_file: ./.env
+      ports:
+         - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      environment:
+         - DB_HOST=mariadb
+         - DB_USER=$DB_USERNAME
+         - DB_PASSWORD=$DB_PASSWORD
+         - DB_NAME=$DB_DATABASE
+         - DB_PORT=$DB_PORT
+      stdin_open: true
+      tty: true
+
+volumes:
+   db:

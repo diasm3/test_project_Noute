@@ -9,7 +9,9 @@ import {
 import { Controller, Get, Logger, Query } from '@nestjs/common';
 import { SalesService } from './sales.service';
 import { Sales } from './entities/sale.entity';
-import { GenderDto } from '../users/dto/users.dto';
+import { GenderDto, GenderType } from '../users/dto/users.dto';
+import { MonthType } from '../products/dto/products.dto';
+import { Users } from '../users/entities/user.entity';
 
 @Controller('api/sales')
 @ApiTags('sales API')
@@ -20,20 +22,20 @@ export class SalesController {
    /*
     * getBestSellerByGender
     */
-   @ApiOkResponse({ type: Sales, isArray: true })
-   @ApiQuery({ name: 'Sales', required: false })
-   @ApiCreatedResponse({ type: Sales })
+   @ApiOkResponse({ type: Users, isArray: true })
+   @ApiCreatedResponse({ type: Users })
    @ApiOperation({
       summary: '성별로 최고로 많이 판매된 상품 조회 API',
       description: '현재 기준 가장 많이 판매된 상품 조회 (성별로 구분)',
    })
    @ApiNotFoundResponse({ description: '잘못된 성별을 입력하셨습니다' })
+   @ApiQuery({ name: 'gender', enum: GenderType })
    @Get('getBestSellerByGender')
    async getBestSellerByGender(
       @Query('gender') genderDto: GenderDto
    ): Promise<object> {
       try {
-         this.logger.verbose(`getProducts list`);
+         this.logger.verbose(`best seller by gender`);
          const result = await this.salesService.getBestSellerByGender(
             genderDto
          );
@@ -45,10 +47,13 @@ export class SalesController {
    }
 
    /*
-    * getBestSellerByGender
+    * getBestSellerByMonth
     */
    @ApiOkResponse({ type: Sales, isArray: true })
-   @ApiQuery({ name: 'Sales', required: false })
+   @ApiQuery({
+      name: 'month',
+      enum: MonthType,
+   })
    @ApiCreatedResponse({ type: Sales })
    @ApiOperation({
       summary: '월별 판매금액이 가장 높은 상품을 조회 API',
@@ -75,7 +80,6 @@ export class SalesController {
     * get
     */
    @ApiOkResponse({ type: Sales, isArray: true })
-   @ApiQuery({ name: 'Sales', required: false })
    @ApiCreatedResponse({ type: Sales })
    @ApiOperation({
       summary: '구매횟수가 가장 적은 회원과, 구매 총액이 가장 높은 회원의 이름',

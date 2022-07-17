@@ -1,6 +1,8 @@
 import {
+   ApiBody,
    ApiCreatedResponse,
    ApiOkResponse,
+   ApiOperation,
    ApiQuery,
    ApiTags,
 } from '@nestjs/swagger';
@@ -21,6 +23,10 @@ export class ProductsController {
    @ApiOkResponse({ type: Products, isArray: true })
    @ApiQuery({ name: 'Products', required: false })
    @ApiCreatedResponse({ type: Products })
+   @ApiOperation({
+      summary: '전체 상품 조회 API',
+      description: '전체 상품 조회를 할 수 있습니다.',
+   })
    @Get('getProducts')
    async getProducts(): Promise<object> {
       try {
@@ -41,8 +47,13 @@ export class ProductsController {
     * @param {string} id
     */
    @ApiOkResponse({ type: Products, isArray: true })
-   // @ApiQuery({ name: 'Products', required: false })
+   // @ApiQuery({ name: 'type', required: false })
    @ApiCreatedResponse({ type: Products })
+   @ApiOperation({
+      summary: '상품목록을 카테고리로 검색해서 가져옵니다. ',
+      description: '카테고리를 입력하면 상품목록을 가져옵니다',
+   })
+   // @ApiBody({ name: 'type', enum: TypeDto })
    @Post('/getByCategories')
    async getByCategories(@Body() typeDto: TypeDto): Promise<object> {
       try {

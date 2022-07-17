@@ -1,22 +1,18 @@
 import { CreateProductsDto, TypeDto } from './dto/products.dto';
-import { Controller, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Products } from './entities/products.entity';
-// import { ProductsRepository } from './products.repository';
+import { Injectable } from '@nestjs/common';
+import { ProductsRepository } from './products.repository';
 import * as MOCK_PRODUCTS from '../../data/products.json';
 
 @Injectable()
 export class ProductsService {
-   // constructor(
-   //    @InjectRepository(ProductsRepository)
-   //    private readonly productsRepository: ProductsRepository
-   // ) {}
+   constructor(private readonly productsRepository: ProductsRepository) {}
 
    // getProducts
    async getProducts(): Promise<CreateProductsDto | object> {
       try {
-         // const resultData = this.productsRepository.getProducts();
+         // const data2 = this.productsRepository.findAll();
          const resultData = MOCK_PRODUCTS.map((data) => data);
+         // console.log(data2);
          return resultData;
       } catch (err) {
          return err.message;
