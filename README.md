@@ -56,7 +56,7 @@ users
 |          | 월별 판매 총액이 가장 높은 상품 조회                     | Get    | /api/sales/getBestSellerByMonth?month=number         | query                                        |
 |          | 구매횟수가 가장 적은 회원과 구매 금액이 가장큰 회원 조회 | Get    | /api/sales/getLowestBuyer                            | 두 조건의 이름이 같을시 한사람의 이름만 표기 |
 
-### API 설명(작성중)
+<!-- ### API 설명(작성중)
 
 | API url       |       endpoint        | Request Method | Request Body           |           Status Code            |                                                                       Return                                                                        |
 | ------------- | :-------------------: | :------------: | ---------------------- | :------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -65,7 +65,7 @@ users
 |               | getRandomByCategories |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 | /api/sales    |     getBestSeller     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
 |               | getBestSellerByMonth  |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
-|               |    getLowestBuyer     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              |
+|               |    getLowestBuyer     |      Get       |                        | `201 ok`<br /> `400 Bad Request` |                                             `{ "ok" :true }` <br /> `{ok: false, "message": "string"}`                                              | -->
 
 ### **기능구현 목록**
 
