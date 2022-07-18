@@ -8,15 +8,18 @@ import {
    OneToMany,
    PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Users extends BaseEntity {
    /* User Id */
    @PrimaryGeneratedColumn()
+   @ApiProperty()
    id: number;
 
    /* User Email */
    @IsEmail()
+   @ApiProperty()
    @Column({
       type: 'varchar',
       length: 128,
@@ -26,6 +29,7 @@ export class Users extends BaseEntity {
 
    /* User Name */
    @IsNotEmpty()
+   @ApiProperty()
    @Column({
       type: 'varchar',
       length: 20,
@@ -35,6 +39,7 @@ export class Users extends BaseEntity {
 
    /* User gender*/
    @IsNotEmpty()
+   @ApiProperty()
    @Column({
       type: 'varchar',
       default: 'mbti',
@@ -45,21 +50,8 @@ export class Users extends BaseEntity {
    /* 테이블 관계 */
 
    /*   */
+   @ApiProperty()
    @OneToMany((type) => Orders, (order) => order.user)
    @JoinColumn({ name: 'id' })
    order: Orders[];
-
-   //    @OneToMany((type) => Comment, (comment) => comment.player)
-   //    @JoinColumn({ name: 'id' })
-   //    comments: Comment[];
-
-   //    @OneToMany((type) => Likes, (like) => like.player)
-   //    likes: Likes[];
-
-   //    @OneToMany((type) => Complete, (complete) => complete.player)
-   //    @JoinColumn({ name: 'id' })
-   //    completes: Complete[];
-
-   //    @OneToMany((type) => Likes, (achievement) => achievement.player)
-   //    achievements: Achievement[];
 }

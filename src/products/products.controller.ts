@@ -4,6 +4,7 @@ import {
    ApiOkResponse,
    ApiOperation,
    ApiQuery,
+   ApiResponse,
    ApiTags,
 } from '@nestjs/swagger';
 import { Body, Controller, Get, Post, Logger } from '@nestjs/common';
@@ -21,8 +22,12 @@ export class ProductsController {
     * getProducts Request response
     */
    @ApiOkResponse({ type: Products, isArray: true })
-   @ApiQuery({ name: 'Products', required: false })
    @ApiCreatedResponse({ type: Products })
+   @ApiResponse({
+      status: 201,
+      description: 'The record has been successfully created.',
+   })
+   @ApiResponse({ status: 403, description: 'Forbidden.' })
    @ApiOperation({
       summary: '전체 상품 조회 API',
       description: '전체 상품 조회를 할 수 있습니다.',
@@ -47,13 +52,15 @@ export class ProductsController {
     * @param {string} id
     */
    @ApiOkResponse({ type: Products, isArray: true })
-   // @ApiQuery({ name: 'type', required: false })
-   @ApiCreatedResponse({ type: Products })
+   @ApiResponse({
+      status: 201,
+      description: 'successfully loaded',
+   })
    @ApiOperation({
       summary: '상품목록을 카테고리로 검색해서 가져옵니다. ',
       description: '카테고리를 입력하면 상품목록을 가져옵니다',
    })
-   // @ApiBody({ name: 'type', enum: TypeDto })
+   @ApiBody({ type: 'type' })
    @Post('/getByCategories')
    async getByCategories(@Body() typeDto: TypeDto): Promise<object> {
       try {
