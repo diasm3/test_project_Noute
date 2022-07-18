@@ -1,9 +1,7 @@
 import {
    ApiBody,
-   ApiCreatedResponse,
    ApiOkResponse,
    ApiOperation,
-   ApiQuery,
    ApiResponse,
    ApiTags,
 } from '@nestjs/swagger';
@@ -22,12 +20,10 @@ export class ProductsController {
     * getProducts Request response
     */
    @ApiOkResponse({ type: Products, isArray: true })
-   @ApiCreatedResponse({ type: Products })
    @ApiResponse({
-      status: 201,
+      status: 200,
       description: 'The record has been successfully created.',
    })
-   @ApiResponse({ status: 403, description: 'Forbidden.' })
    @ApiOperation({
       summary: '전체 상품 조회 API',
       description: '전체 상품 조회를 할 수 있습니다.',
@@ -56,6 +52,7 @@ export class ProductsController {
       status: 201,
       description: 'successfully loaded',
    })
+   // @ApiCreatedResponse({ type: })
    @ApiOperation({
       summary: '상품목록을 카테고리로 검색해서 가져옵니다. ',
       description: '카테고리를 입력하면 상품목록을 가져옵니다',
@@ -81,8 +78,11 @@ export class ProductsController {
     * getRandomByCategories
     */
    @ApiOkResponse({ type: Products, isArray: true })
+   @ApiOperation({
+      summary: '각 카테고리별 상품 하나를 랜덤으로 가져옵니다.',
+      description: '카테고리별 상품 하나씩을 랜덤으로 가져 옵니다.',
+   })
    // @ApiQuery({ name: 'Products', required: false })
-   @ApiCreatedResponse({ type: Products })
    @Get('getRandomByCategories')
    async getRandomByCategories(): Promise<object> {
       try {

@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -11,7 +11,7 @@ export class Products extends BaseEntity {
 
    /* Product type */
    @IsNotEmpty()
-   @ApiProperty()
+   @ApiProperty({ enum: ['diary', 'sticker', 'note', 'brush'] })
    @Column({
       type: 'varchar',
       length: 100,

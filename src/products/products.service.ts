@@ -28,6 +28,7 @@ export class ProductsService {
          const resultData = MOCK_PRODUCTS.filter((data) =>
             data.type.includes(type)
          );
+
          return resultData;
       } catch (err) {
          return err.message;

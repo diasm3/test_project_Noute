@@ -1,5 +1,4 @@
 import {
-   ApiCreatedResponse,
    ApiNotFoundResponse,
    ApiOkResponse,
    ApiOperation,
@@ -23,7 +22,6 @@ export class SalesController {
     * getBestSellerByGender
     */
    @ApiOkResponse({ type: Users, isArray: true })
-   @ApiCreatedResponse({ type: Users })
    @ApiOperation({
       summary: '성별로 최고로 많이 판매된 상품 조회 API',
       description: '현재 기준 가장 많이 판매된 상품 조회 (성별로 구분)',
@@ -54,7 +52,6 @@ export class SalesController {
       name: 'month',
       enum: MonthType,
    })
-   @ApiCreatedResponse({ type: Sales })
    @ApiOperation({
       summary: '월별 판매금액이 가장 높은 상품을 조회 API',
       description: '주어진 달에 대한 최고 판매금액을 조회합니다',
@@ -80,7 +77,6 @@ export class SalesController {
     * get
     */
    @ApiOkResponse({ type: Sales, isArray: true })
-   @ApiCreatedResponse({ type: Sales })
    @ApiOperation({
       summary: '구매횟수가 가장 적은 회원과, 구매 총액이 가장 높은 회원의 이름',
       description:
@@ -97,14 +93,23 @@ export class SalesController {
          const customerName1 = customer1[0].name;
          const customerName2 = customer2[0].name;
 
+         let result = null;
+
          if (customerName1 === customerName2) {
-            return { ok: true, data: customerName1 };
+            result = customerName1;
          }
 
          return {
             ok: true,
-            low: customerName1,
-            vip: customerName2,
+            data: [
+               {
+                  low: customerName1,
+                  vip: customerName2,
+               },
+               {
+                  unique: result,
+               },
+            ],
          };
       } catch (err) {
          return { ok: false, row: err.message };

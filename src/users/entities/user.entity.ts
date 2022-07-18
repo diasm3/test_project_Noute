@@ -1,4 +1,4 @@
-import { IsEmail, IsEmpty, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Orders } from '../../orders/entities/order.entity';
 import {
    BaseEntity,
@@ -51,7 +51,7 @@ export class Users extends BaseEntity {
 
    /*   */
    @ApiProperty()
-   @OneToMany((type) => Orders, (order) => order.user)
+   @OneToMany(() => Orders, (order) => order.user)
    @JoinColumn({ name: 'id' })
    order: Orders[];
 }

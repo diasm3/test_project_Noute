@@ -17,3 +17,4 @@ export class CreateSalesDto {
 }
 
 // export class DateDto extends PickType(CreateSalesDto, ['orderdAt'] as const) {}
+
