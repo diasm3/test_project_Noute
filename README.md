@@ -25,7 +25,7 @@ $ sudo docker compose up
 
 ### 아키텍쳐
 
--  프레임워크 : Nest.js
+-  프레임워크 : Nest.js, docker 
 -  데이터베이스 : MariaDB, JSON
 -  배포서버 : 개인NAS 서버 (http://diasm.mooo.com:3000/api/)
 
@@ -100,3 +100,4 @@ users
       -  자신있다고 할 수는 없지만, MVC 페턴으로 비지니스로직과 컨트롤러부분을 나누어 구현한 것
       -  그래도 비지니스 로직은 구현을 완료 했다는 점에 대해서 만족하고 있습니다.
       -  시간이 더 있다면 swagger, testcode, expection 까지 더 할 수 있었지만 typeorm 으로 구현 하려다가 시간을 다 썻습니다.
+      - docker compose로 mariadb로 묶어서 테스트 할 수 있도록 구성(확장성 문제로 실제 서비스로는 불가) 
