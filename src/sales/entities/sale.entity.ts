@@ -12,21 +12,26 @@ import {
    OneToMany,
    PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Sales extends BaseEntity {
    /* Sale Id */
    @PrimaryGeneratedColumn()
+   @ApiProperty()
    id: number;
 
    @CreateDateColumn({})
+   @ApiProperty()
    createdAt: Date;
 
    /* 테이블 관계 */
 
+   @ApiProperty()
    @ManyToOne((type) => Products, (products) => products.id)
    products: Products;
 
+   @ApiProperty()
    @ManyToOne((type) => Orders, (orders) => orders.id)
    orders: Orders;
 }

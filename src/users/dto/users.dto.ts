@@ -12,7 +12,6 @@ export class CreateUsersDto {
    name: string;
 
    @IsNotEmpty()
-   @ApiProperty()
    gender: string;
 }
 
